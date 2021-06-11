@@ -28,9 +28,11 @@ public class UserApiController {
 */
 
     /**************
-     * 회원 가입 (인증이 필요없는 경우)
+     * 회원 가입 (전통적인 방식)
      **************/
-    @PostMapping("/api/auth/join")
+/*
+
+    @PostMapping("/api/user/join")
     public ResponseDto<Integer> save(@RequestBody User user) {
 
         // 관리자 권한은 서버에서 직접 넣어 줘야 하니 여기서 생성
@@ -40,6 +42,7 @@ public class UserApiController {
         userService.회원가입(user);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);  // 자바오브젝트를 JSON으로 변환해서 리턴
     }
+*/
 
     /**********************
      * 로그인 (전통적인 방식)
@@ -60,10 +63,22 @@ public class UserApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 */
+    /**************
+     * 회원 가입 (인증 필요 없이 처리)
+     **************/
+    @PostMapping("/api/auth/join")
+    public ResponseDto<Integer> save(@RequestBody User user) {
+
+        // 관리자 권한은 서버에서 직접 넣어 줘야 하니 여기서 생성
+        user.setRole(RoleType.USER);
+
+        // 서비스 호출
+        userService.회원가입(user);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);  // 자바오브젝트를 JSON으로 변환해서 리턴
+    }
 
     /**********************
      * 로그인 (스프링부트 시큐리티 방식)
-     * 시큐리티 라이브러리가 적용되면 무조건 스프링 기본 로그인 화면으로 간다.
      **********************/
 
 

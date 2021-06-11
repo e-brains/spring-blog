@@ -16,6 +16,8 @@ public class UserController {
     /********************
      * 전통적인 방식 로그인
      *********************/
+/*
+
     @GetMapping("user/loginForm")
     public String loginForm() {
         return "user/loginForm";
@@ -25,23 +27,13 @@ public class UserController {
     public String joinForm() {
         return "user/joinForm";
     }
+*/
 
     /********************
-     *  스프링 시큐리티를 이용한 로그인 (인증이 필요 없는 경우)
+     *  스프링 시큐리티를 이용한 로그인
      *********************/
-    @GetMapping("user/auth/loginForm")
-    public String authLoginForm() {
-        return "user/loginForm";
-    }
+/*
 
-    @GetMapping("user/auth/joinForm")
-    public String authJoinForm() {
-        return "user/joinForm";
-    }
-
-    /********************
-     *  스프링 시큐리티를 이용한 로그인 (인증이 필요한 겨우)
-     *********************/
     @GetMapping("user/security/loginForm")
     public String securityLoginForm() {
         return "user/loginForm";
@@ -51,6 +43,25 @@ public class UserController {
     public String securityJoinForm() {
         return "user/joinForm";
     }
+*/
+
+    /********************
+     *  스프링 시큐리티를 이용한 로그인 화면 (인증이 필요 없이 접근 가능해야 함)
+     *********************/
+    @GetMapping("auth/loginForm")
+    public String authLoginForm() {
+        return "user/loginForm";
+    }
+
+    /********************
+     *  스프링 시큐리티를 이용한 회원가입 화면 (인증이 필요 없이 접근 가능해야 함)
+     *********************/
+    @GetMapping("auth/joinForm")
+    public String authJoinForm() {
+        return "user/joinForm";
+    }
+
+
 
 
     // 클라이언트에서 ajax 호출 시

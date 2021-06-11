@@ -24,12 +24,12 @@ public class UserService {
     /***************
      * 로그인 (전통적인 방식)
      ****************/
-/*
+
     @Transactional(readOnly = true) // select할때 트랜잭션 시작 부터 트랜잭션 종료 시 까지 데이터 정합성 보장 (repeatable read)
     public User 로그인(User user) {
         return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
-*/
+
 
     /***************
      * 로그인 (스프링부트 시큐리티 방식)
