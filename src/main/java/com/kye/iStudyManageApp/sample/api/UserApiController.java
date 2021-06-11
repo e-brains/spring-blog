@@ -6,6 +6,7 @@ import com.kye.iStudyManageApp.sample.model.User;
 import com.kye.iStudyManageApp.sample.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +18,10 @@ import javax.servlet.http.HttpSession;
 @RestController
 public class UserApiController {
 
-    @Autowired
+    @Autowired  // DI로 주입됨
     private UserService userService;
+
+
 /*
 
     // DI를 해서 사용할 수도 있지만 메서드의 파라미터로 등록하는 순간 스프링이 빈으로 등록해 줌
@@ -64,21 +67,19 @@ public class UserApiController {
     }
 */
     /**************
-     * 회원 가입 (인증 필요 없이 처리)
+     * 스프링부트 시큐리티 방식 회원 가입 (인증 필요 없이 처리)
      **************/
     @PostMapping("/api/auth/join")
     public ResponseDto<Integer> save(@RequestBody User user) {
 
-        // 관리자 권한은 서버에서 직접 넣어 줘야 하니 여기서 생성
-        user.setRole(RoleType.USER);
-
+        System.out.printf("api/auth/join security save ============== \n");
         // 서비스 호출
-        userService.회원가입(user);
+        userService.시큐리티_회원가입(user);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);  // 자바오브젝트를 JSON으로 변환해서 리턴
     }
 
     /**********************
-     * 로그인 (스프링부트 시큐리티 방식)
+     * 스프링부트 시큐리티 방식 로그인 (인증 필요 없이 처리)
      **********************/
 
 

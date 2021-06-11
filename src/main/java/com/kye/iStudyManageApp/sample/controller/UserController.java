@@ -46,20 +46,21 @@ public class UserController {
 */
 
     /********************
-     *  스프링 시큐리티를 이용한 로그인 화면 (인증이 필요 없이 접근 가능해야 함)
-     *********************/
-    @GetMapping("auth/loginForm")
-    public String authLoginForm() {
-        return "user/loginForm";
-    }
-
-    /********************
      *  스프링 시큐리티를 이용한 회원가입 화면 (인증이 필요 없이 접근 가능해야 함)
      *********************/
     @GetMapping("auth/joinForm")
     public String authJoinForm() {
-        return "user/joinForm";
+        return "auth/joinForm2";
     }
+
+    /********************
+     *  스프링 시큐리티를 이용한 로그인 화면 (인증이 필요 없이 접근 가능해야 함)
+     *********************/
+    @GetMapping("auth/loginForm")
+    public String authLoginForm() {
+        return "auth/loginForm2";
+    }
+
 
 
 

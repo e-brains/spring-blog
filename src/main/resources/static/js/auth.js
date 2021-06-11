@@ -35,13 +35,14 @@ let index={
                 alert("회원가입이 완료되었습니다. !! ");
                 location.href="/"; // 첫화면으로 이동 (여기서는 index.mustache)
             }else{
-                alert(response.status);
-                alert(response.data);
+                alert("실패 !!!");
+                //alert(response.data);
             }
 
 
         }).fail(function(error){
-            alert(JSON.stringify(error));
+            alert("에러 !!!");
+            //alert(JSON.stringify(error));
         });
     },
 
