@@ -9,6 +9,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--summer 노트-->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
 <body>
 
@@ -36,26 +40,31 @@
             <!-- 스프링 시큐리티를 이용한 로그인 방식 ( UserController 호출 ) -->
             <!--user정보가 없으면-->
             {{^principal}}
-            <li class="nav-item">
-                <a class="nav-link" href="/auth/loginForm">로그인</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/auth/joinForm">회원가입</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/auth/loginForm2">로그인</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/auth/joinForm2">회원가입</a>
+                </li>
             {{/principal}}
 
             <!--user정보가 있으면-->
             {{#principal}}
-            <li class="nav-item">
-                <a class="nav-link" href="/board/writeForm">글쓰기</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/user/updateForm">개인정보수정</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">로그아웃</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/board/saveForm">글쓰기</a>
+                </li>
+                <!--카카오 나 구글을 이용한 OAuth 로그인 사용자가 아닌 경우만 정보수정이 가능함 -->
+                {{^principal.oAuth}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/updateForm">개인정보수정</a>
+                    </li>
+                {{/principal.oAuth}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">로그아웃</a>
+                </li>
             {{/principal}}
+
+
         </ul>
     </div>
 </nav>

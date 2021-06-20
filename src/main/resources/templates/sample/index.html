@@ -7,12 +7,20 @@
 
 <div class="container">
     <div class="card m-2" >
+        {{#boards}}
         <div class="card-body">
-            <h4 class="card-title">제목 적는 부분</h4>
-            <p class="card-text">내용 보여 주는 부분</p>
-            <a href="#" class="btn btn-primary">상세보기</a>
+            <h4 class="card-title">{{title}}</h4>
+            <a href="/board/detail/{{id}}" class="btn btn-primary">상세보기</a>
         </div>
+        {{/boards}}
     </div>
+
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="?page={{previous}}">Previous</a></li>
+      <!--  <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+        <li class="page-item"><a class="page-link" href="?page={{next}}">Next</a></li>
+    </ul>
+
 </div>
 
 <br>

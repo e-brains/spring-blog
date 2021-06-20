@@ -1,5 +1,6 @@
 package com.kye.iStudyManageApp.sample.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,7 +30,7 @@ public class Board {
     @Lob // 대용량 데이터 처리할 때 사용
     private String content;  // 섬머노트 라이브러리 사용 (html태그가 섞여 있어서 용량이 큼)
 
-    @ColumnDefault("0")  // default값을 0으로 설정
+    //@ColumnDefault("0")  // default값을 0으로 설정
     private int count;  // 조회수
 
     // FetchType.EAGER는 데이터를 즉시 사용하겠다는 의미
@@ -39,9 +40,12 @@ public class Board {
     @JoinColumn(name = "userId")  // 실제 DB에 생성할 때는 userId라는 FK로 생성하라는 의미
     private User user;  // DB는 오브젝트를 저장할 수 없기 때문에 DB에서 FK로 만들어진다.
 
-    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // mappedBy는 연관관계의 주인이 아니기 때문에(FK가 아님) DB에 컬럼을 만들지 말라는 의미
-                                   // Reply에 있는 board 변수명을 mappdeBy에 할당한다.
-    private List<Reply> reply;     // 연관관계의 주인은 board로서 단순히 여러개의 답변에 대한 데이터만 조인으로 가져온다.
+    // mappedBy는 연관관계의 주인이 아니기 때문에(FK가 아님) DB에 컬럼을 만들지 말라는 의미
+    // Reply에 있는 board 변수명을 mappdeBy에 할당한다.
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"board"})  // reply에서 board를 다시 참조하는데 이때 무시하도록 한다.
+    @OrderBy("id desc") // sort 옵션
+    private List<Reply> replys;  // 연관관계의 주인은 board로서 단순히 여러개의 답변에 대한 데이터만 조인으로 가져온다.
 
     @CreationTimestamp
     private Timestamp createDate;

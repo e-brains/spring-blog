@@ -37,6 +37,8 @@ public class User {
     @Enumerated(EnumType.STRING)  // DB가 인식할 수 있도록 string임을 알려주는 어노테이션을 붙인다.
     private RoleType role;  // 개발자 오류를 방지하기 위해 Enum(범위, 도메인 설정 가능)을 쓰는게 좋다. (ADMIN, USER, MANAGER 도메인으로 설정)
 
+    private String oAuth; // 카카오 , 구글 등 OAuth로그인 사용자인지 구분하는 구분자. 없을 경우는 null 허용
+
     @CreationTimestamp  // 시간이 자동 입력 (자바에서 현재 시간을 만들어 준다)
     private Timestamp createDate;
 

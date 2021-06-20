@@ -1,0 +1,41 @@
+{{>layout/header}}
+
+<div>
+    <form>
+        <input type="hidden", id="id", value="{{user.id}}">
+
+        <div class="form-group">
+            <label for="username">이름</label>
+            <input type="text" value="{{user.username}}" class="form-control" placeholder="Enter name" id="username" readonly>
+        </div>
+
+        {{#user.oAuth}}
+            <div class="form-group">
+                <label for="password">패스워드:</label>
+                <input type="password" class="form-control disabled" readonly>
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" value="{{user.email}}" class="form-control" readonly >
+            </div>
+        {{/user.oAuth}}
+        {{^user.oAuth}}
+            <div class="form-group">
+                <label for="password">패스워드:</label>
+                <input type="password" class="form-control" placeholder="Enter password" id="password">
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" value="{{user.email}}" class="form-control" placeholder="Enter email" id="email">
+            </div>
+        {{/user.oAuth}}
+
+    </form>
+
+    <button id="btn-update" class="btn btn-primary">회원정보수정 완료</button>
+</div>
+
+<!--스프링 시큐리티 적용한 user.js-->
+<script src="/js/auth.js"></script>
+
+{{>layout/footer}}

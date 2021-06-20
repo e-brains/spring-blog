@@ -29,10 +29,14 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # entity파일의 변수명이 그대로 컬럼명이 된다는 의미
       use-new-id-generator-mappings: false  # JPA의 기본 넘버링을 따라가지 않는다, true: 따른다.
-    show-sql: true  # 톰캣 부팅 시 sql 실행을 콘솔에 보여줌
+    show-sql: false  # 톰캣 부팅 시 sql 실행을 콘솔에 보여줌
     properties:
       hibernate.format_sql: true  # 부팅 시 sql 실행을 보기좋게 콘솔에 보여줌
 
   jackson:
     serialization:
       fail-on-empty-beans: false
+
+# 카카오 로그인 시  사용
+kye:
+  key: kye1234

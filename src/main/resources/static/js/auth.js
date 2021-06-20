@@ -1,10 +1,14 @@
 let index={
     init:function(){
         $("#btn-save").on("click", ()=>{   // function(){}을 사용하지 않은 이유는 this를 바인딩하기 위해서 !!
-            this.save();  //  function(){}을 사용하면 this가 윈도우 객체를 가리키게 되기 때문에 ()=>{}을 사용함
+                this.save();  //  function(){}을 사용하면 this가 윈도우 객체를 가리키게 되기 때문에 ()=>{}을 사용함
         });
 
-        $("#btn-login").on("click", ()=>{  // loginForm.mustache에서 로그인 버튼이 클릭되면 ..
+        $("#btn-update").on("click", ()=>{
+                this.update();
+        });
+
+        $("#btn-login").on("click", ()=>{
             this.login();
         })
     },
@@ -35,14 +39,44 @@ let index={
                 alert("회원가입이 완료되었습니다. !! ");
                 location.href="/"; // 첫화면으로 이동 (여기서는 index.mustache)
             }else{
-                alert("실패 !!!");
-                //alert(response.data);
+                alert(response.status);
+                alert(response.data);
             }
 
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        });
+    },
+
+    /********
+    회원정보 수정
+    **********/
+    update:function(){
+        alert('auth.js의 update()함수 호출됨');
+        let data={
+            id:$("#id").val(),
+            username:$("#username").val(),
+            password:$("#password").val(),
+            email:$("#email").val()
+        };
+
+        $.ajax({
+            type:"PUT",
+            url:"/api/auth/userUpdate",
+            data:JSON.stringify(data),  // http body데이터, 위에서 정의한 자바스크립트 오브젝트인 data를 Json 문자열로 변환
+            contentType:"application/json; charset=utf-8", // body데이터가 어떤 타입인지(MIME)
+            dataType:"json" // 서버에서 응답이 오면 기본적으로 문자열 (생긴게 json이라면)=> 자바스크립트 오브젝트로 변환
+        }).done(function(response){  // 자바스크립트 오브젝트로 변환된 상태로 받음
+            if(response.status == 200){
+                alert("회원수정이 완료되었습니다. !! ");
+                location.href="/"; // 첫화면으로 이동 (여기서는 index.mustache)
+            }else{
+                alert(response.status);
+                alert(response.data);
+            }
 
         }).fail(function(error){
-            alert("에러 !!!");
-            //alert(JSON.stringify(error));
+            alert(JSON.stringify(error));
         });
     },
 

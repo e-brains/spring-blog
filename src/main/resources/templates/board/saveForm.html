@@ -1,0 +1,37 @@
+{{>layout/header}}
+
+<h1 align="center">어서 오세요</h1>
+<h2 align="center">자녀 학습관리 시스템 입니다.</h2>
+<br>
+<br>
+
+<div class="container">
+    <form>
+
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter title" id="title">
+        </div>
+
+        <div class="form-group">
+            <textarea class="form-control summernote" rows="5" id="content"></textarea>
+        </div>
+
+    </form>
+
+    <button id="btn-board-save" class="btn btn-primary">글쓰기 완료</button>
+</div>
+
+<script>
+      $('.summernote').summernote({
+        tabsize: 2,
+        height:280
+      });
+
+</script>
+
+<br>
+<br>
+<script src="/js/board.js"></script>
+
+{{>layout/footer}}
+
