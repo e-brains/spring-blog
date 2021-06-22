@@ -42,7 +42,9 @@ public class Board {
 
     // mappedBy는 연관관계의 주인이 아니기 때문에(FK가 아님) DB에 컬럼을 만들지 말라는 의미
     // Reply에 있는 board 변수명을 mappdeBy에 할당한다.
-    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    // cascade는 연관관계가 없지만 테이블에 저장 또는 삭제가 가능하도록 하는 옵션, 게시글이
+    // 삭제되면 댓글을 남겨 놓을 필요가 없으므로 옵션을 REMOVE 로 줘서 댓글도 삭제되도록 한다.
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"board"})  // reply에서 board를 다시 참조하는데 이때 무시하도록 한다.
     @OrderBy("id desc") // sort 옵션
     private List<Reply> replys;  // 연관관계의 주인은 board로서 단순히 여러개의 답변에 대한 데이터만 조인으로 가져온다.

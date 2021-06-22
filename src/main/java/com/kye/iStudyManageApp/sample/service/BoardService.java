@@ -18,6 +18,7 @@ import java.util.List;
 @Service
 public class BoardService {
 
+
     @Autowired  // DI로 주입됨
     private BoardRepository boardRepository;
 
@@ -122,7 +123,14 @@ public class BoardService {
         // 개별로 쪼개서 넣어야 한다.
         // 그래야 쿼리에 순서대로 들어감 그래서 객체를 넣을 수 없음
         int result = replyRepository.mSave(replySaveRequestDto.getUserId(), replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+    }
 
+    /***************
+     * 댓글 삭제
+     ****************/
+    @Transactional
+    public void 댓글삭제(int replyId){
+        replyRepository.deleteById(replyId);
     }
 
 

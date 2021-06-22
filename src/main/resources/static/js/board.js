@@ -1,5 +1,5 @@
 let index={
-    init:function(){
+    init:function(){ // 리스너 등록
         $("#btn-board-save").on("click", ()=>{   // function(){}을 사용하지 않은 이유는 this를 바인딩하기 위해서 !!
             this.save();  //  function(){}을 사용하면 this가 윈도우 객체를 가리키게 되기 때문에 ()=>{}을 사용함
         });
@@ -167,8 +167,39 @@ let index={
             }).fail(function(error){
                 alert(JSON.stringify(error));
             });
-        }
+        },
 
+        /********
+        댓글 삭제
+        (리스너가 아니고 onClick 함수이기 때문에 맨 앞단에서의 리스너 등록이 필요 없음)
+        여기서 boardId는 특별한 용도는 없고 단순히 주소를 만들기 위해서 받음
+        **********/
+        replyDelete:function(boardId, principalId, userId, replyId){
+            alert("댓글 삭제 시작 -=======");
+            console.log(replyId);
+
+            if ( principalId != userId){   // 로그인한 자기 것만 삭제 가능하게 한다.
+                alert("삭제할 권한이 없습니다.");
+                return
+            }
+
+            $.ajax({
+                type:"DELETE",
+                url:`/api/board/${boardId}/reply/${replyId}`, // 싱글 쿼테이션이 아님 숫자키 앞에 ` 임
+                dataType:"json"
+            }).done(function(response){
+                if(response.status == 200){
+                    alert("댓글 삭제가 완료되었습니다. !! ");
+                    location.href=`/board/detail/${boardId}`; // 다시 상세 화면으로 이동
+                }else{
+                    alert("댓글 삭제 실패 ");
+                    alert(response.status);
+                }
+
+            }).fail(function(error){
+                alert(JSON.stringify(error));
+            });
+        }
 
 }
 
