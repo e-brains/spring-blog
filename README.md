@@ -1,2 +1,2 @@
 # spring-blog
-spring + jpa
+spring + jpa + mySql
