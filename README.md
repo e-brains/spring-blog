@@ -1,0 +1,2 @@
+# spring-blog
+spring + jpa
